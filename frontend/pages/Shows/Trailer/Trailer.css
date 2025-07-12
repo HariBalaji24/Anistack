@@ -1,0 +1,20 @@
+.trailer-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.trailer-iframe{
+    height: 650px;
+    width: 1500px;
+}
+.no-trailer{
+    color: white;
+    font-size: 2rem;
+    height: 500px;
+    width: 700px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

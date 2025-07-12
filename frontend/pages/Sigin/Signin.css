@@ -1,0 +1,98 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #000000;
+}
+
+.login-box {
+  background-color: #2c3e50;
+  padding: 30px;
+  border-radius: 8px;
+  width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  color: #fff;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  color: #ecf0f1;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 2px solid #34495e;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #34495e;
+  color: #fff;
+}
+
+.form-group input::placeholder {
+  color: #bdc3c7;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgb(218, 33, 255);
+}
+
+button {
+  background-color: rgb(154, 0, 184);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgb(128, 4, 153);
+}
+
+.switch {
+  text-align: center;
+  margin-top: 20px;
+  color: #ecf0f1;
+}
+
+.toggle {
+  color: rgb(218, 33, 255)c;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.toggle-section{
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
+.toggle-link{
+  font-weight: 600;
+  cursor: pointer;
+}
+.toggle:hover {
+  text-decoration: underline;
+}
