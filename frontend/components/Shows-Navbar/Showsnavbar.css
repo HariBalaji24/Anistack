@@ -1,0 +1,26 @@
+.shows-container {
+    width: 90%;
+    margin: 50px auto;
+    overflow: hidden;
+  }
+  
+  .shows-navbar-container1{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .shows-navbar{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 1.6rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 40px;
+  }
+  
+ 

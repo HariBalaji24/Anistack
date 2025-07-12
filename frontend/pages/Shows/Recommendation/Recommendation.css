@@ -1,0 +1,173 @@
+body {
+    background-color: #121212; 
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+  }
+  
+  .popular-card-anime {
+    text-align: center;
+    color: white; 
+    margin-top: 0px;
+    margin-bottom: 40px;
+    font-size: 2.56rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .popular-card {
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 1800px;
+  }
+  
+  .popular-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+    height: 100%;
+  }
+  
+  .popular-card-elements {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    height: 100%;
+  }
+  
+  .popular-card-elements:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+  
+  .popular-card-title {
+    color: grey;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    text-transform: capitalize;
+  }
+  
+  .popular-card-image {
+    width: 100%;
+    aspect-ratio: 537 / 800;
+    object-fit: cover;
+  }
+  .popular-card-title::before{
+     position: absolute;
+     left: 0;
+     top: -20px;
+     z-index: -3;
+     font-weight: 500;
+     padding: 10px;
+     content: "ADD TO LIST +";
+     width: 100%;
+     color: white;
+     background: #8B34B7;
+  }
+  .popular-card-elements:hover .popular-card-title::before{
+     z-index: 3;
+     top: -65px;
+  }
+  
+  .popular-card-episodes,
+  .popular-card-score,
+  .popular-card-genres,
+  .popular-card-status {
+    color: grey;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .popular-card-card2 {
+    text-align: center;
+  }
+  
+  .popular-card-card1 {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .popular-card-elements:hover .popular-card-title,
+  .popular-card-elements:hover .popular-card-episodes,
+  .popular-card-elements:hover .popular-card-score,
+  .popular-card-elements:hover .popular-card-genres,
+  .popular-card-elements:hover .popular-card-status {
+    color: white;
+  }
+  
+  /* Pagination Styles */
+  .popular-card-palignation {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .popular-card-next,
+  .popular-card-previous {
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px;
+  }
+  
+  .popular-card-next {
+    background-color: #8B34B7;
+  }
+  
+  .popular-card-next:hover,
+  .popular-card-previous:hover {
+    transform: scale(1.05);
+  }
+  
+  .popular-card-previous:disabled {
+    background-color: #555;
+  }
+  
+  .popular-card-previous {
+    background-color: #8B34B7;
+  }
+  
+  .popular-card-pagebtn {
+    margin: 5px;
+    height: 50px;
+    font-size: 0.96rem;
+    width: 50px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    color: #121212;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .popular-card-pagebtn:hover {
+    background-color: #ddd;
+  }
+  
+  .popular-card-pagebtn.active {
+    background-color: #8B34B7;
+    color: white;
+    cursor: default;
+  }
+  
+  .popular-card-type {
+    color: white;
+    position: relative;
+    top: 29px;
+    padding: 5px 10px;
+    background: #8B34B7;
+  }
+  

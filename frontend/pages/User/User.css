@@ -1,0 +1,88 @@
+/* User.css */
+
+.user-container {
+  background-color: #0e0e10;
+  color: #ffffff;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.user-section {
+  margin-bottom: 4rem;
+}
+.user-image {
+  width: 100%;
+  height: 300px;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+}
+
+.user-title {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: #c600cd;
+  display: inline-block;
+}
+
+.user-empty {
+  font-style: italic;
+  color: #888;
+  margin-left: 1rem;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-card {
+  background-color: #1a1a1d;
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  width: 270px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+.user-card-title {
+  font-size: 1.3rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.user-status,
+.user-episodes,
+.user-duration,
+.user-watched,
+.user-remaining,
+.user-chapters,
+.user-total-chapters {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #e4e4e4;
+}
+
+/* Progress Bar */
+.progress-bar {
+  background-color: #333;
+  height: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 0.6rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #10b981; /* green */
+  transition: width 0.3s ease-in-out;
+}
