@@ -27,7 +27,7 @@ const User = () => {
     }
 
     fetchdetails();
-  }, []);
+  }, [token]);
 
   const formatTime = (minutes) => {
     const hrs = Math.floor(minutes / 60);
@@ -37,6 +37,7 @@ const User = () => {
 
   return (
     <div className="user-container">
+      {/* ================== ANIME SECTION ================== */}
       <div className="user-section">
         <h2 className="user-title">Anime List</h2>
         {animedetails.length === 0 ? (
@@ -51,35 +52,56 @@ const User = () => {
                 anime.totalEpisodes > 0
                   ? (anime.episodesWatched / anime.totalEpisodes) * 100
                   : 0;
-
+              console.log(remainingTime)
               return (
-                <Link to={`/anime/${anime.id}`}><li key={index} className="user-card">
-                  <img src={anime.image} alt="" className="user-image" />
-                  <h3 className="user-card-title">{anime.name}</h3>
-                  <p className="user-status">Status : {anime.status}</p>
-                  <p className="user-episodes">Episodes : {anime.totalEpisodes}</p>
-                  <p className="user-episodes">Episodes watched : {anime.episodesWatched}</p>
-                  <p className="user-duration">Duration : {anime.duration} min</p>
-                  <p className="user-watched">
-                    Time Watched : {formatTime(watchedTime)}
-                  </p>
-                  <p className="user-remaining">
-                    Time Remaining : {formatTime(remainingTime)}
-                  </p>
-                  <div className="progress-bar">
-                    <div
-                      className="progress-fill"
-                      style={{ width: `${Math.min(progress, 100)}%` }}
-                    ></div>
-                  </div>
-                </li></Link>
-                 
+                <li key={index} className="user-card">
+                  <Link to={`/anime/${anime.id}`}>
+                    <img
+                      src={anime.image}
+                      alt={anime.name}
+                      className="user-image"
+                    />
+                    <h3 className="user-card-title">{anime.name}</h3>
+                    <p className="user-status">Status: {anime.status}</p>
+                    <p className="user-episodes">
+                      Episodes: {anime.totalEpisodes}
+                    </p>
+                    <p className="user-episodes">
+                      Episodes watched: {anime.episodesWatched || 0}
+                    </p>
+                    <p className="user-duration">
+                      Duration: {anime.duration} min
+                    </p>
+
+                    <p className="user-watched">
+                      Time Watched:{" "}
+                      {watchedTime > 0
+                        ? formatTime(watchedTime)
+                        : "0hr 0min"}
+                    </p>
+
+                    <p className="user-remaining">
+                      Time Remaining:{" "}
+                      {
+                        isNaN(remainingTime) ? formatTime(totalTime) : formatTime(remainingTime)
+                      }
+                    </p>
+
+                    <div className="progress-bar">
+                      <div
+                        className="progress-fill"
+                        style={{ width: `${Math.min(progress, 100) || 0}%` }}
+                      ></div>
+                    </div>
+                  </Link>
+                </li>
               );
             })}
           </ul>
         )}
       </div>
 
+      {/* ================== MANGA SECTION ================== */}
       <div className="user-section">
         <h2 className="user-title">Manga List</h2>
         {mangadetails.length === 0 ? (
@@ -87,35 +109,42 @@ const User = () => {
         ) : (
           <ul className="user-list">
             {mangadetails.map((manga, index) => (
-             <Link to={`/manga/${manga.id}`} > <li key={index} className="user-card">
-                  <img src={manga.image} alt="" className="user-image" />
-                <h3 className="user-card-title">{manga.name}</h3>
-                <p className="user-status">Status: {manga.status}</p>
-                <p className="user-chapters">
-                  Chapters Read: {manga.chaptersRead}
-                </p>
-                
-                {manga.totalChapters!==null && 
-                <div><p className="user-total-chapters">
-                  Total Chapters: {manga.totalChapters}
-                </p>
-                <div className="progress-bar">
-                  <div
-                    className="progress-fill"
-                    style={{
-                      width: `${
-                        manga.totalChapters > 0
-                          ? (manga.chaptersRead / manga.totalChapters) * 100
-                          : 0
-                      }%`,
-                    }}
-                  ></div>
-                </div></div>
-                
-                }
-              </li></Link>
+              <li key={index} className="user-card">
+                <Link to={`/manga/${manga.id}`}>
+                  <img
+                    src={manga.image}
+                    alt={manga.name}
+                    className="user-image"
+                  />
+                  <h3 className="user-card-title">{manga.name}</h3>
+                  <p className="user-status">Status: {manga.status}</p>
+                  <p className="user-chapters">
+                    Chapters Read: {manga.chaptersRead || 0}
+                  </p>
+
+                  {manga.totalChapters !== null && (
+                    <div>
+                      <p className="user-total-chapters">
+                        Total Chapters: {manga.totalChapters}
+                      </p>
+                      <div className="progress-bar">
+                        <div
+                          className="progress-fill"
+                          style={{
+                            width: `${
+                              
+                                 (manga.chaptersRead / manga.totalChapters) *
+                                  100
+                                || 0
+                            }%`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+                </Link>
+              </li>
             ))}
-            
           </ul>
         )}
       </div>

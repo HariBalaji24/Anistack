@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "../../services/axios";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import noprofile from "../../Assets/noprofile.jpg"
+import logo from "../../Assets/logo.jpeg"
 
 const Navbar = () => {
   const [genredata, setGenreData] = useState([]);
@@ -82,12 +84,8 @@ const Navbar = () => {
       <div className="navbar">
         <div className="navbar-container">
           <Link to="/">
-            <div className="navbar-right">
-              <img
-                className="navbar-image"
-                src="https://img.freepik.com/free-vector/colorful-letter-gradient-logo-design_474888-2309.jpg?semt=ais_hybrid&w=740"
-                alt="logo"
-              />
+            <div className="navbar-left">
+              <img src={logo} className="navbar-logo" alt="" />
               <h1 className="navbar-title">Anistack</h1>
             </div>
           </Link>
@@ -178,7 +176,7 @@ const Navbar = () => {
                 >
                   <div className="navbar-user-signin">{name}</div>
                   <img
-                    src="https://static.wikia.nocookie.net/1e39c2a9-f2b3-4673-927f-9ed5d5c3f188/scale-to-width/755"
+                    src={noprofile}
                     className="navbar-user-image"
                     alt="user"
                   />
@@ -200,7 +198,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/signin">
                   <img
-                    src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-transparent-600nw-2534623311.jpg"
+                    src={noprofile}
                     className="navbar-user-image"
                     alt="guest"
                   />

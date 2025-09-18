@@ -489,9 +489,9 @@ const Shows = () => {
               {isManga ? "Reading" : "Watching"} :{" "}
               {stats?.[isManga ? "reading" : "watching"] ?? "N/A"}
             </h3>
-            <h3 className="shows-stat-item">Completed : {stats.completed}</h3>
-            <h3 className="shows-stat-item">On Hold : {stats.on_hold}</h3>
-            <h3 className="shows-stat-item">Dropped : {stats.dropped}</h3>
+            <h3 className="shows-stat-item">Completed : {stats?.completed}</h3>
+            <h3 className="shows-stat-item">On Hold : {stats?.on_hold}</h3>
+            <h3 className="shows-stat-item">Dropped : {stats?.dropped}</h3>
             {!isManga ? (
               <h3 className="shows-stat-item">
                 Want to Watch : {stats.plan_to_watch}

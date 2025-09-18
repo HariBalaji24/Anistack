@@ -3,15 +3,13 @@ import "./Home.css";
 import axios from "../../services/axios";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
-
+import wallpaper from "../../Assets/one piece image.jpg"
 const Home = () => {
   const [animeData, setAnimeData] = useState([]);
   const [page, setPage] = useState(1);
   const [condition, setCondition] = useState("all");
   const [searchresults, setsearchresults] = useState(null);
   const [result,setresult] = useState("Show Results")
-  const [state,setstate]=useState(false)
-  // Debounced search handler
 
   const loadResults = useCallback(
     debounce(async (word) => {
@@ -86,7 +84,7 @@ const Home = () => {
       <div className="home-container1">
         <img
           className="home-image"
-          src="https://www.hdwallpapers.in/download/luffy_zoro_lie_busanji_nami_chopper_robin_and_merry_hd_one_piece_fighting_path-1366x768.jpg"
+          src={wallpaper}
           alt="Banner"
         />
 
