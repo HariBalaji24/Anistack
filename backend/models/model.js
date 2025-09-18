@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const validator = require("validator");
 dotenv.config({ path: "./config.env" });
