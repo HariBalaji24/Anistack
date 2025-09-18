@@ -35,7 +35,6 @@ const Popular = () => {
   return (
     <div>
       <div className='popular-card'>
-       
         <div className='popular-card-container'>
           {animeData.map((anime) => (
             <Link to={`/anime/${anime.mal_id}`} >
