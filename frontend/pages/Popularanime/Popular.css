@@ -1,5 +1,5 @@
 body {
-  background-color: #121212; 
+  background-color: yellow; 
   font-family: "Poppins";
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@ body {
   color: white; 
   margin-top: 0px;
   margin-bottom: 40px;
-  font-size: 2.56rem;
+  font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -24,7 +24,7 @@ body {
 
 .popular-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
   margin-top: 20px;
   height: 100%;

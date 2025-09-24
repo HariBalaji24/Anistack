@@ -3,39 +3,36 @@ import "./Home.css";
 import axios from "../../services/axios";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
-import wallpaper from "../../Assets/one piece image.jpg"
 const Home = () => {
   const [animeData, setAnimeData] = useState([]);
   const [page, setPage] = useState(1);
   const [condition, setCondition] = useState("all");
   const [searchresults, setsearchresults] = useState(null);
-  const [result,setresult] = useState("Show Results")
+  const [result, setresult] = useState("Show Results");
 
   const loadResults = useCallback(
     debounce(async (word) => {
       if (word.trim() === "") {
         setsearchresults(null);
-      }
-       else {
+      } else {
         try {
           const response = await axios.get(
-            `anime?q=${word}&order_by=popularity&limit=5` ||  `manga?q=${word}&order_by=popularity&limit=5`
+            `anime?q=${word}&order_by=popularity&limit=5` ||
+              `manga?q=${word}&order_by=popularity&limit=5`
           );
-          
-          if(response.data.data.length===0){
-            setresult("No results found")
-            setsearchresults([])
-          }
-          else{
+
+          if (response.data.data.length === 0) {
+            setresult("No results found");
+            setsearchresults([]);
+          } else {
             setsearchresults(response.data.data);
-            setresult("Show results")
+            setresult("Show results");
           }
-          
-          
         } catch (err) {
-          return null
+          return null;
+        }
       }
-    }}, 200),
+    }, 200),
     []
   );
 
@@ -51,17 +48,17 @@ const Home = () => {
         let response;
         if (condition === "all") {
           response = await axios.get(
-            `anime?status=complete&start_date=2024-01-01&sort=asc&limit=24&page=${page}`
+            `anime?status=complete&start_date=2024-01-01&sort=asc&limit=21&page=${page}`
           );
         } else if (condition === "trending") {
           response = await axios.get(
-            `top/anime?filter=airing&limit=24&page=${page}`
+            `top/anime?filter=airing&sfw=true&limit=21&page=${page}`
           );
         } else if (condition === "random") {
           response = await axios.get(
-            `anime?genres_exclude=12&page=${Math.floor(
+            `anime?genres_exclude=12&sfw=true&page=${Math.floor(
               Math.random() * 100
-            )}&limit=24`
+            )}&limit=21`
           );
         }
         setAnimeData(response.data.data);
@@ -77,14 +74,13 @@ const Home = () => {
     fetchAnime();
   }, [page, condition]);
 
-
   return (
     <div className="home-container">
       {/* Top Banner & Search */}
       <div className="home-container1">
         <img
           className="home-image"
-          src={wallpaper}
+          src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/178788-uYQZgw1v7xyN.jpg"
           alt="Banner"
         />
 
@@ -100,38 +96,39 @@ const Home = () => {
           alt="Search icon"
           className="home-search-icon"
         />
-
-        
-        
       </div>
       <div className="search-elements">
-        {
-             searchresults!==null && searchresults.map((anime)=>{
-                return <Link to={`/anime/${anime.mal_id}`}><div className="search-card">
-                    <img src={anime.images.jpg.large_image_url} alt="" className="search-image" />
-                    <div className="search-details">
-                      <h2 className="search-name">{anime.title_english || anime.title}</h2>
-                    <h2 className="search-name">Genres : {anime.genres.map(g => g.name).join(", ")}</h2>
+        {searchresults !== null &&
+          searchresults.map((anime,index) => {
+            return (
+              <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+                <div className={`search-card ${index % 2 === 0 ? "search-even-index" : "search-odd-index"}`}>
+                  <img
+                    src={anime.images.jpg.large_image_url}
+                    alt=""
+                    className="search-image"
+                  />
+                  <div className="search-details">
+                    <h2 className="search-name">
+                      {anime.title_english || anime.title}
+                    </h2>
+                    <h2 className="search-name">
+                      Genres : {anime.genres.map((g) => g.name).join(", ")}
+                    </h2>
                     <h2 className="search-name">Type : {anime.type}</h2>
-                    <h2 className="search-name">Score : {(anime.score/2).toFixed(1)}</h2>
-                    </div>
-              
-                    
-                </div></Link>
-             })
-           }
-           {
-            searchresults!==null && <div className="home-showresults">{result}</div>
-           }
-           
-        </div>
+                    <h2 className="search-name">
+                      Score : {(anime.score / 2).toFixed(1)}
+                    </h2>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+      </div>
       <div className="home-container2">
         <div className="container21">
           <div className="home-navbarcontainer">
-            <div
-              onClick={() => setCondition("all")}
-              className="home-elements"
-            >
+            <div onClick={() => setCondition("all")} className="home-elements">
               All
             </div>
             <div
@@ -162,50 +159,45 @@ const Home = () => {
             >
               {">"}
             </button>
-            
-  
           </div>
-          
         </div>
         <div className="home-card-elements">
-    {animeData.map((anime) => (
-      <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-        <div className="home-card-card1">
-          <span className="home-card-type">{anime.type}</span>
-          <img
-            className="home-card-image"
-            src={anime.images.jpg.image_url}
-            alt={anime.title}
-          />
-          <h3 className="home-card-title">
-            {anime.title_english || anime.title}
-          </h3>
-          <div className="home-card-card2">
-            <h3 className="home-card-status">
-              Status: {anime.status || "Unknown"}
-            </h3>
-            <h3 className="home-card-episodes">
-              Episodes: {anime.episodes ?? "Unknown"}
-            </h3>
-            <h3 className="home-card-score">
-              Score:{" "}
-              {anime.score != null
-                ? (anime.score / 2).toFixed(1)
-                : "Not Rated"}
-            </h3>
-            <h3 className="home-card-genres">
-              Genres:{" "}
-              {anime.genres?.length > 0
-                ? anime.genres.map((g) => g.name).join(", ")
-                : "N/A"}
-            </h3>
-          </div>
+          {animeData.map((anime) => (
+            <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+              <div className="home-card-card1">
+                <span className="home-card-type">{anime.type}</span>
+                <img
+                  className="home-card-image"
+                  src={anime.images.jpg.image_url}
+                  alt={anime.title}
+                />
+                <h3 className="home-card-title">
+                  {anime.title_english || anime.title}
+                </h3>
+                <div className="home-card-card2">
+                  <h3 className="home-card-status">
+                    Status : {anime.status || "Unknown"}
+                  </h3>
+                  <h3 className="home-card-episodes">
+                    Episodes : {anime.episodes ?? "Unknown"}
+                  </h3>
+                  <h3 className="home-card-score">
+                    Score :{" "}
+                    {anime.score != null
+                      ? (anime.score / 2).toFixed(1)
+                      : "Not Rated"}
+                  </h3>
+                  <h3 className="home-card-genres">
+                    Genres :{" "}
+                    {anime.genres?.length > 0
+                      ? anime.genres.map((g) => g.name).join(", ")
+                      : "N/A"}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </Link>
-      
-    ))}
-    
-    </div>
       </div>
     </div>
   );

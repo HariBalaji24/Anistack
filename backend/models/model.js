@@ -10,27 +10,14 @@ mongoose
   .catch((err) => console.error("Connection error:", err));
 
 const userschema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    validate: {
-      validator: validator.isEmail,
-      message: "Enter valid email id",
-    },
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
+  name: String,
+  email: { type: String, unique: true },
+  password: { type: String, default: null },
+  image : {type:String,default:"https://photosraja.com/wp-content/uploads/2024/09/no-dp_40.webp"},
   animeList: [
     {
       id: { type: Number, required: true },
-      image:{type:String, required:true},
+      image: { type: String, required: true },
       name: { type: String, required: true },
       duration: { type: Number, required: true },
       totalEpisodes: { type: Number, required: true },
@@ -57,7 +44,7 @@ const userschema = new mongoose.Schema({
   mangaList: [
     {
       id: { type: Number, required: true },
-      image:{type:String, required:true},
+      image: { type: String, required: true },
       name: { type: String, required: true },
       totalChapters: { type: Number },
       chaptersRead: { type: Number },
@@ -80,8 +67,6 @@ const userschema = new mongoose.Schema({
     },
   ],
 });
-
-
 
 const User = mongoose.model("Users", userschema);
 module.exports = User;

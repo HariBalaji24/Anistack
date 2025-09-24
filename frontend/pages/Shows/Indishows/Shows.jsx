@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useParams, useLocation } from "react-router-dom";
 import axios from "../../../services/axios";
 import "./Shows.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Shows = () => {
   const { id } = useParams();
@@ -14,13 +16,10 @@ const Shows = () => {
   const [animeoption, setAnimeoption] = useState();
   const [mangaoption, setMangaoption] = useState();
   const [clicked, setclicked] = useState(false);
-
   const [watched, setwatched] = useState(0);
   const [watchlist, setwatchlist] = useState([]);
-
   const [read, setread] = useState(0);
   const [readlist, setreadlist] = useState([]);
-
   const token = localStorage.getItem("auth-token");
 
   const colorepisode = (id) => {
@@ -36,7 +35,10 @@ const Shows = () => {
   };
 
   const colorchapter = (id) => {
-    if (clicked ) {
+    if (!token) {
+      toast.error("Log in first to add this to your list");
+    }
+    if (clicked) {
       const newList = [...readlist, id];
       setreadlist(newList);
       setread(newList.length);
@@ -57,7 +59,10 @@ const Shows = () => {
     const episodes = episodedata.length;
     const details = {
       id: data.mal_id,
-      image: data.images?.jpg?.large_image_url || data.images?.webp?.large_image_url || "",
+      image:
+        data.images?.jpg?.large_image_url ||
+        data.images?.webp?.large_image_url ||
+        "",
       name: data.title_english || data.title,
       duration: dur === 0 ? 23 : dur,
       totalEpisodes: episodes,
@@ -65,7 +70,7 @@ const Shows = () => {
       createdAt: new Date().toISOString(),
       updatedAt: updated,
     };
-    console.log(details);
+
     try {
       const response = await axios.post(
         "http://localhost:3000/user/animepost",
@@ -82,7 +87,10 @@ const Shows = () => {
   const mangaaddtolist = async (updated) => {
     const details = {
       id: data.mal_id,
-      image: data.images?.jpg?.large_image_url || data.images?.webp?.large_image_url || "",
+      image:
+        data.images?.jpg?.large_image_url ||
+        data.images?.webp?.large_image_url ||
+        "",
       name: data.title_english || data.title,
       totalChapters: data.chapters,
       chaptersRead: read,
@@ -102,7 +110,6 @@ const Shows = () => {
       console.error("Error ", error);
     }
   };
-
   const animechange = async (updatedat, newStatus, episodeList = watchlist) => {
     try {
       const details = {
@@ -112,7 +119,6 @@ const Shows = () => {
         updatedAt: new Date(updatedat).toISOString(),
         numberofepisodeswatched: episodeList,
       };
-      console.log(details);
       await axios.patch("http://localhost:3000/user/animechanges", details, {
         headers: { authorization: token },
       });
@@ -130,7 +136,6 @@ const Shows = () => {
         updatedAt: new Date(updatedat).toISOString(),
         numberofchaptersread: chapterList,
       };
-      console.log(details);
       await axios.patch("http://localhost:3000/user/mangachanges", details, {
         headers: { authorization: token },
       });
@@ -139,36 +144,34 @@ const Shows = () => {
     }
   };
   // For manga
- useEffect(() => {
-  if (!isManga || !data || !token) return;
+  useEffect(() => {
+    if (!isManga || !data || !token) return;
 
-  const getmangadetails = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/user/getmangadetails?id=${id}`,
-        {
-          headers: { authorization: token },
-        }
-      );
+    const getmangadetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user/getmangadetails?id=${id}`,
+          {
+            headers: { authorization: token },
+          }
+        );
 
-      const { status, numberofchaptersread } = response.data.details; // ✅ FIXED HERE
-      setclicked(true);
-      setMangaoption(status);
-      setreadlist(numberofchaptersread || []); // ✅ Always use fallback
-      setread((numberofchaptersread || []).length); // ✅ Avoid undefined.length
-    } catch (error) {
-      console.error(
-        "Get manga details error:",
-        error.response?.data || error.message
-      );
-    }
-  };
+        const { status, numberofchaptersread } = response.data.details;
+        setclicked(true);
+        setMangaoption(status);
+        setreadlist(numberofchaptersread || []); // ✅ Always use fallback
+        setread((numberofchaptersread || []).length); // ✅ Avoid undefined.length
+      } catch (error) {
+        console.error(
+          "Get manga details error:",
+          error.response?.data || error.message
+        );
+      }
+    };
 
-  getmangadetails();
-}, [data, id, token, isManga]);
+    getmangadetails();
+  }, [data, id, token, isManga]);
 
-
-  // For anime
   useEffect(() => {
     if (isManga || !data || !token) return;
 
@@ -176,19 +179,28 @@ const Shows = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/user/getanimedetails?id=${id}`,
-          {
-            headers: { authorization: token },
-          }
+          { headers: { authorization: token } }
         );
+
         const { status, numberofepisodeswatched } = response.data.details;
         setclicked(true);
         setAnimeoption(status);
         setwatchlist(numberofepisodeswatched);
       } catch (error) {
-        console.error(
-          "Get anime details error:",
-          error.response?.data || error.message
-        );
+        if (
+          error.response?.status === 404 &&
+          error.response?.data?.message === "anime not found in user list"
+        ) {
+          // 👇 Don’t treat this as error, just set state to "not in list"
+          setclicked(false);
+          setAnimeoption(null);
+          setwatchlist([]);
+        } else {
+          console.error(
+            "Unexpected error:",
+            error.response?.data || error.message
+          );
+        }
       }
     };
 
@@ -227,9 +239,8 @@ const Shows = () => {
         if (response.data.data.type === "Movie") {
           let strnum1 = response.data.data.duration.split(" hr")[0];
           let strnum2 = response.data.data.duration
-            .split(" hr ")[1]
-            .split(" min")[0];
-          console.log(strnum1, " ", strnum2);
+            ?.split(" hr ")[1]
+            ?.split(" min")[0];
           let num1 = Number(strnum1) * 60;
           let num2 = Number(strnum2);
           setdur(num1 + num2);
@@ -307,6 +318,7 @@ const Shows = () => {
 
   return (
     <div className="show-container">
+      {/* <ToastContainer position="top-right" autoClose={3000} /> */}
       <div className="shows-container1">
         <img
           className="shows-image"
@@ -431,6 +443,10 @@ const Shows = () => {
             ) : (
               <button
                 onClick={async () => {
+                  if (!token) {
+                    toast.error("Please log in to add this to your list");
+                    return;
+                  }
                   setclicked(true);
                   if (isManga) {
                     await mangaaddtolist(Date.now());
@@ -494,37 +510,67 @@ const Shows = () => {
             <h3 className="shows-stat-item">Dropped : {stats?.dropped}</h3>
             {!isManga ? (
               <h3 className="shows-stat-item">
-                Want to Watch : {stats.plan_to_watch}
+                Want to Watch : {stats?.plan_to_watch}
               </h3>
             ) : (
               <h3 className="shows-stat-item">
-                Want to Read : {stats.plan_to_read}
+                Want to Read : {stats?.plan_to_read}
               </h3>
             )}
           </div>
         </div>
       </div>
 
-      {!isManga &&
-      data.status !== "Not yet aired" &&
-      data.type !== "Movie" &&
-      episodedata !== null ? (
+      {!isManga && data.status !== "Not yet aired" && episodedata !== null ? (
         <div className="shows-container3">
           <h2 className="show-container3-episodes">Available Episodes</h2>
           <div className="shows-episodes-list">
-            {episodedata.map((epi) => (
+            {data.type == "Movie" ? (
               <span
-                onClick={() => colorepisode(epi.mal_id)}
-                key={epi.mal_id}
+                onClick={() => {
+                  if (!token) {
+                    toast.error("Please log in to add this to your list")
+                    return;
+                  }
+                  else{
+                    toast.success("Anime successfully added to your list")
+                  }
+                  colorepisode(1);
+                }}
+                key={1}
                 className={`shows-episodes-number ${
-                  watchlist?.includes(epi.mal_id) &&
+                  watchlist?.includes(1) &&
                   clicked !== false &&
                   "shows-episodes-number-color"
                 }`}
               >
-                {epi.mal_id}
+                1
               </span>
-            ))}
+            ) : (
+              episodedata.map((epi) => (
+                <span
+                  onClick={() => {
+                    if (!token) {
+                      if (!token) {
+                        toast.error("Please log in to add this to your list");
+                        return;
+                      } else {
+                        toast.success("Anime successfully added to your list");
+                      }
+                    }
+                    colorepisode(epi.mal_id);
+                  }}
+                  key={epi.mal_id}
+                  className={`shows-episodes-number ${
+                    watchlist?.includes(epi.mal_id) &&
+                    clicked !== false &&
+                    "shows-episodes-number-color"
+                  }`}
+                >
+                  {epi.mal_id}
+                </span>
+              ))
+            )}
           </div>
         </div>
       ) : (
@@ -535,7 +581,15 @@ const Shows = () => {
             <div className="shows-episodes-list">
               {Array.from({ length: data.chapters }).map((_, index) => (
                 <span
-                  onClick={() => colorchapter(index + 1)}
+                  onClick={() => {
+                    if (!token) {
+                      toast.error("Please log in to add this to your list");
+                      return;
+                    } else {
+                      toast.success("Anime successfully added to your list");
+                    }
+                    colorchapter(index + 1);
+                  }}
                   key={index + 1}
                   className={`shows-episodes-number ${
                     readlist?.includes(index + 1) &&

@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const userrouter = require("./routes/userroutes");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import userrouter from "./routes/userroutes.js";
 
 dotenv.config({ path: "./config.env" });
 
@@ -11,8 +11,7 @@ const port = process.env.PORT || 3000;
 // ✅ Fix CORS here
 app.use(cors({
   origin: "http://localhost:5173", // frontend origin
-  credentials: true, // allow cookies/token headers
-  exposedHeaders: ["Authorization"] // allow frontend to access token header
+  credentials: true, 
 }));
 
 app.use(express.json());

@@ -34,14 +34,14 @@ const User = () => {
     const mins = minutes % 60;
     return `${hrs}hr ${mins}min`;
   };
-
+console.log(animedetails)
   return (
     <div className="user-container">
       {/* ================== ANIME SECTION ================== */}
       <div className="user-section">
         <h2 className="user-title">Anime List</h2>
         {animedetails.length === 0 ? (
-          <p className="user-empty">No anime added yet.</p>
+          <p className="user-empty">No anime added yet</p>
         ) : (
           <ul className="user-list">
             {animedetails.map((anime, index) => {
@@ -52,7 +52,6 @@ const User = () => {
                 anime.totalEpisodes > 0
                   ? (anime.episodesWatched / anime.totalEpisodes) * 100
                   : 0;
-              console.log(remainingTime)
               return (
                 <li key={index} className="user-card">
                   <Link to={`/anime/${anime.id}`}>
@@ -63,9 +62,12 @@ const User = () => {
                     />
                     <h3 className="user-card-title">{anime.name}</h3>
                     <p className="user-status">Status: {anime.status}</p>
-                    <p className="user-episodes">
+                    {
+                      anime.totalEpisodes!==0 && <p className="user-episodes">
                       Episodes: {anime.totalEpisodes}
-                    </p>
+                    </p> 
+                    }
+                    
                     <p className="user-episodes">
                       Episodes watched: {anime.episodesWatched || 0}
                     </p>
@@ -105,7 +107,7 @@ const User = () => {
       <div className="user-section">
         <h2 className="user-title">Manga List</h2>
         {mangadetails.length === 0 ? (
-          <p className="user-empty">No manga added yet.</p>
+          <p className="user-empty">No manga added yet</p>
         ) : (
           <ul className="user-list">
             {mangadetails.map((manga, index) => (

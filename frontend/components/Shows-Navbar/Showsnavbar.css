@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: space-between;
     color: white;
-    font-size: 1.2rem;
+    font-size: 15pxrem;
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: 400;
@@ -23,4 +23,11 @@
     margin-bottom: 20px;
   }
   
- 
+ .individual{
+  background: rgb(30, 30, 30);
+  padding: 10px 20px;
+  border-radius: 10px;
+ }
+ .individual:hover{
+  background: rgb(161, 0, 193);
+ }

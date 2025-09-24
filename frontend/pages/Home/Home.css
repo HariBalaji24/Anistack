@@ -7,7 +7,7 @@
    width: 90%;
    margin: auto;
    z-index: 0;
-   height: 90vh;
+   height: 45vh;
 }
 
 .home-search-bar{
@@ -17,7 +17,7 @@
   height: 50px;
   right: 50%;
   top: 18%;
-  width: 50vw;
+  width: 45vw;
   padding: 13px 0 10px 70px;
   border: none;
   background: #ffffff;
@@ -50,10 +50,12 @@
 }
 .container21{
   display: flex;
-  width: 90%;
+  width: 100%;
+  padding: 0 3vw;
   margin: auto;
   margin-bottom: 20px;
   justify-content: space-between;
+  align-items: center;
 }
 .home-elements:hover {
   color: #8B34B7;
@@ -61,20 +63,22 @@
 }
 .home-navbarcontainer{
    display: flex;
-   gap: 50px;
-   width: 80%;
+   gap: 2vw;
+   justify-content: end;
    font-size: 1.5rem ;
 }
 .container22{
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   gap: 20px;
 }
 .home-button-previous,.home-button-next{
-   height: 100%;
-   width: 45px;
+   
+   padding:12px 20px;
    background: #575757;
-   font-size: 30px;
-   border-radius:50px;
+   border-radius:100%;
    cursor: pointer;
 }
 .home-button-previous:disabled{
@@ -140,8 +144,9 @@
   width: 100%;
   background: #8B34B7;
   color: white;
-  font-weight: 300;
-  padding: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 12px;
   z-index: -7;
 }
 
@@ -160,7 +165,7 @@
 .home-card-genres,
 .home-card-card1 > p {
   color: grey;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   text-align: center;
 }
@@ -175,31 +180,37 @@
 }
 
 .search-elements{
-  height:auto;
-  width: 700px;
+  width: 40vw;
   position: absolute;
-  top: 26%;
+  top: 25.5%;
   transform: translate(-50%,0%);
   left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  z-index: 10;
 }
-
+.search-even-index{
+  background: rgb(21, 21, 21);
+}
+.search-odd-index{
+  background: rgb(38, 38, 38);
+}
 .search-card{
   color: white;
-  background: #6b6b6b;
-  border: 2px solid #3f3f3f;
-  opacity: 0.9;
   display: flex;
   align-items: center;
   width: 700px;
   height: 130px;
+  font-size: 13px;
+}
+.search-card:hover{
+  background: black;
 }
 .search-image{
-  height: 130px;
-  width: 100px;
+  height: 110px;
+  width: 90px;
+  margin: 0 10px;
 }
 .search-details{
   display: flex;
@@ -212,7 +223,7 @@
   position: absolute;
    color: white;
    bottom: -73px;
-   height: 70px;
+   height: 50px;
    font-size: 2rem;
    font-weight: 300;
    background: #8B34B7;

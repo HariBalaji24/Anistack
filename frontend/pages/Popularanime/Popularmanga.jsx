@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../services/axios';
-import "./Popular.css";
+
 
 import { Link } from 'react-router-dom';
 

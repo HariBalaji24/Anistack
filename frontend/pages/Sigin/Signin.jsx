@@ -2,11 +2,38 @@ import React, { useState } from "react";
 import "./Signin.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import googleimage from "../../Assets/google-image.png";
+import {useGoogleLogin} from "@react-oauth/google"
 
 const Signin = () => {
   const [mode, setMode] = useState("Sign In");
   const [user, setUser] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
+
+ const responsegoogle = async (authResult) => {
+  try {
+    if (authResult.code) {
+      const response = await axios.get(
+        `http://localhost:3000/user/google?code=${authResult.code}`
+      );
+      console.log(response.data.token);
+      // Save token and redirect
+      localStorage.setItem("auth-token", response.data.token);
+      toast.success("Google login successful!");
+      navigate("/");
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error("Google login failed");
+  }
+};
+
+const googlelogin = useGoogleLogin({
+  onSuccess: responsegoogle,
+  onError: responsegoogle,
+  flow: "auth-code",
+});
 
   const handleChange = (e) => {
     setUser((prev) => ({
@@ -16,7 +43,9 @@ const Signin = () => {
   };
 
   const handleSubmit = async () => {
-    const url = `http://localhost:3000/user/${mode === "Sign In" ? "signin" : "login"}`;
+    const url = `http://localhost:3000/user/${
+      mode === "Sign In" ? "signin" : "login"
+    }`;
     const payload = {
       email: user.email,
       password: user.password,
@@ -31,15 +60,29 @@ const Signin = () => {
       const data = response.data;
 
       if (data.success && data.token) {
-
         localStorage.setItem("auth-token", data.token);
-        navigate("/");
-        window.location.reload()
+        toast.success(`${mode} successful`, {
+          position: "top-center", 
+          duration: 3000,        
+          style: { fontSize: "16px" },
+          icon: "✅",
+        });
+        setTimeout(() =>{ navigate("/"); window.location.reload()}, 2000);
       } else {
-        alert("Login/Register failed");
+        toast.error(`${mode} failed. Try again`, {
+          position: "top-center",
+          duration: 3000,
+          style: { fontSize: "16px" },
+          icon: "❌",
+        });
       }
     } catch (error) {
-      alert(error.response?.data?.message);
+      toast.error(error.response?.data?.message || "Something went wrong", {
+        position: "top-center",
+        duration: 3000,
+        style: { fontSize: "16px" },
+        icon: "❌",
+      });
     }
   };
 
@@ -50,37 +93,44 @@ const Signin = () => {
 
   return (
     <div className="login-container">
+      {/* Toast container */}
+      <Toaster 
+        position="top-right" 
+        reverseOrder={false} 
+        toastOptions={{
+          duration: 3000,
+          style: { fontSize: "16px" },
+        }}
+      />
+
       <div className="login-box">
         <h3 className="title">{mode}</h3>
         <div className="form">
           {mode === "Sign In" && (
             <div className="form-group">
-              <label htmlFor="name">Name</label>
               <input
                 name="name"
                 type="text"
-                placeholder="Enter your name"
+                placeholder="Username"
                 value={user.name}
                 onChange={handleChange}
               />
             </div>
           )}
           <div className="form-group">
-            <label htmlFor="email">Email</label>
             <input
               name="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Email address"
               value={user.email}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
             <input
               name="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Password"
               value={user.password}
               onChange={handleChange}
             />
@@ -97,6 +147,12 @@ const Signin = () => {
             <span onClick={toggleMode} className="toggle-link">
               {mode === "Sign In" ? " Log In" : " Sign In"}
             </span>
+            <div>
+              <div className="with-google" onClick={googlelogin} >
+                <img className="google-image" src={googleimage} alt="" />
+                <p>Continue with Google</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

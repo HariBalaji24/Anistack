@@ -21,13 +21,13 @@
 
 .user-title {
   font-size: 2rem;
+  font-family: "Poppins";
   margin-bottom: 1.2rem;
-  color: #c600cd;
+  font-weight: 600;
   display: inline-block;
 }
 
 .user-empty {
-  font-style: italic;
   color: #888;
   margin-left: 1rem;
 }
@@ -55,7 +55,7 @@
 }
 
 .user-card-title {
-  font-size: 1.3rem;
+  font-size: 15px;
   color: white;
   margin-bottom: 0.5rem;
 }
@@ -68,7 +68,7 @@
 .user-chapters,
 .user-total-chapters {
   margin: 0.3rem 0;
-  font-size: 0.95rem;
+  font-size: 14px;
   color: #e4e4e4;
 }
 

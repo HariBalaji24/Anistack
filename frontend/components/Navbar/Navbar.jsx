@@ -13,13 +13,13 @@ const Navbar = () => {
   const [searchbar, setSearchbar] = useState(false);
   const [name, setName] = useState([]);
   const [clicked, setClicked] = useState(false);
-
-  const userRef = useRef(null); // For dropdown and image reference
+  const [userimage,setuserimage] = useState("https://photosraja.com/wp-content/uploads/2024/09/no-dp_40.webp")
+  const userRef = useRef(null); 
 
   useEffect(() => {
     async function fetchGenres() {
       try {
-        const response = await axios.get("genres/anime?swf");
+        const response = await axios.get("genres/anime?swf=true");
         const sorted = response.data.data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
@@ -43,6 +43,7 @@ const Navbar = () => {
           },
         });
         setName(response.data.name);
+        setuserimage(response.data.image)
       } catch (error) {
         console.error("Error fetching name:", error);
       }
@@ -176,7 +177,7 @@ const Navbar = () => {
                 >
                   <div className="navbar-user-signin">{name}</div>
                   <img
-                    src={noprofile}
+                    src={userimage}
                     className="navbar-user-image"
                     alt="user"
                   />
@@ -197,8 +198,9 @@ const Navbar = () => {
                   <div className="navbar-user-signin">Sign in</div>
                 </Link>
                 <Link to="/signin">
+                
                   <img
-                    src={noprofile}
+                    src={userimage}
                     className="navbar-user-image"
                     alt="guest"
                   />

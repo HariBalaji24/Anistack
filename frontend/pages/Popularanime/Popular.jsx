@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../services/axios';
-import "./Popular.css";
 import { Link } from 'react-router-dom';
 
 const Popular = () => {
@@ -37,8 +36,8 @@ const Popular = () => {
       <div className='popular-card'>
         <div className='popular-card-container'>
           {animeData.map((anime) => (
-            <Link to={`/anime/${anime.mal_id}`} >
-              <div key={anime.mal_id} className='popular-card-elements'>
+            <Link key={anime.mal_id}  to={`/anime/${anime.mal_id}`} >
+              <div className='popular-card-elements'>
                 <div className='popular-card-card1'>
                   <span className='popular-card-type'>{anime.type}</span>
                   <img className='popular-card-image' src={anime.images.jpg.large_image_url} alt={anime.title} />

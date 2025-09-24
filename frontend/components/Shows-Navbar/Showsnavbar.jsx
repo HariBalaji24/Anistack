@@ -17,13 +17,13 @@ const Showsnavbar = () => {
       <div className='shows-container'>
         <div className="shows-navbar-container1"> 
           <div className="shows-navbar">
-          <Link to={""} ><div >Overview</div></Link>
-          <Link to={`seasons`} ><div >Relations</div></Link>
-          <Link to={"characters"}><div >Characters</div></Link>
-          {  !isManga && (<Link to={"staffs" }><div >Staffs</div></Link>) }
-          <Link to={"images"} ><div >Images</div></Link>
-          <Link to={"recommendations"} ><div>Recommendations</div></Link>
-          {!isManga && (<Link to={"trailers"} ><div>Trailers</div></Link>)}
+          <Link to={""} ><div className='individual'>Overview</div></Link>
+          <Link to={`seasons`} className='individual' ><div >Relations</div></Link>
+          <Link to={"characters"}><div className='individual' >Characters</div></Link>
+          {  !isManga && (<Link to={"staffs" }><div className='individual' >Staffs</div></Link>) }
+          <Link to={"images"} ><div className='individual' >Images</div></Link>
+          <Link to={"recommendations"} ><div className='individual'>Recommendations</div></Link>
+          {!isManga && (<Link to={"trailers"}  className='individual'><div>Trailers</div></Link>)}
           
         </div>
         </div>
