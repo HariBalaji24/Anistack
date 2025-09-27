@@ -449,8 +449,10 @@ const Shows = () => {
                   }
                   setclicked(true);
                   if (isManga) {
+                    toast.success("Manga has been added")
                     await mangaaddtolist(Date.now());
                   } else {
+                    toast.success("Anime has been added")
                     await animeaddtolist(Date.now());
                   }
                 }}
@@ -550,14 +552,13 @@ const Shows = () => {
               episodedata.map((epi) => (
                 <span
                   onClick={() => {
-                    if (!token) {
                       if (!token) {
                         toast.error("Please log in to add this to your list");
                         return;
                       } else {
-                        toast.success("Anime successfully added to your list");
+                        toast.success("Anime has been updated to your list");
                       }
-                    }
+                    
                     colorepisode(epi.mal_id);
                   }}
                   key={epi.mal_id}
@@ -586,7 +587,7 @@ const Shows = () => {
                       toast.error("Please log in to add this to your list");
                       return;
                     } else {
-                      toast.success("Anime successfully added to your list");
+                      toast.success("Chapter has been updated to your list");
                     }
                     colorchapter(index + 1);
                   }}

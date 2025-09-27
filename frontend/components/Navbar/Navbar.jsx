@@ -79,14 +79,14 @@ const Navbar = () => {
     localStorage.removeItem("auth-token")
     window.location.reload()
   }
-
+  console.log(userimage)
   return (
     <div className="navs" onClick={() => setSearchbar(false)}>
-      <div className="navbar">
+     
+      <div className="navbar"> 
         <div className="navbar-container">
           <Link to="/">
             <div className="navbar-left">
-              <img src={logo} className="navbar-logo" alt="" />
               <h1 className="navbar-title">Anistack</h1>
             </div>
           </Link>

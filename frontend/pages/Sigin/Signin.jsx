@@ -18,7 +18,6 @@ const Signin = () => {
         `http://localhost:3000/user/google?code=${authResult.code}`
       );
       console.log(response.data.token);
-      // Save token and redirect
       localStorage.setItem("auth-token", response.data.token);
       toast.success("Google login successful!");
       navigate("/");
