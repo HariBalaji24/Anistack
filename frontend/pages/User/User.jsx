@@ -13,7 +13,7 @@ const User = () => {
     async function fetchdetails() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/user/user-details",
+          "https://anistack-1.onrender.com/user/user-details",
           {
             headers: { authorization: token },
           }

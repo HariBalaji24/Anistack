@@ -11,6 +11,9 @@ git reset HEAD config.env
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+#config
+backend/config.env
+
 # Runtime data
 pids
 *.pid

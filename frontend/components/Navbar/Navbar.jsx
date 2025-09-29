@@ -37,7 +37,7 @@ const Navbar = () => {
 
     async function fetchName() {
       try {
-        const response = await axios.get("http://localhost:3000/user/getname", {
+        const response = await axios.get("https://anistack-1.onrender.com/user/getname", {
           headers: {
             authorization: token,
           },

@@ -10,7 +10,8 @@ const port = process.env.PORT || 3000;
 
 // ✅ Fix CORS here
 app.use(cors({
-  origin: "http://localhost:5173", // frontend origin
+  origin: "http://localhost:5173",
+  origin:"https://anistack-wine.vercel.app", // frontend origin
   credentials: true, 
 }));
 

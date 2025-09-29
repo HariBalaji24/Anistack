@@ -15,7 +15,7 @@ const Signin = () => {
   try {
     if (authResult.code) {
       const response = await axios.get(
-        `http://localhost:3000/user/google?code=${authResult.code}`
+        `https://anistack-1.onrender.com/user/google?code=${authResult.code}`
       );
       console.log(response.data.token);
       localStorage.setItem("auth-token", response.data.token);
@@ -42,7 +42,7 @@ const googlelogin = useGoogleLogin({
   };
 
   const handleSubmit = async () => {
-    const url = `http://localhost:3000/user/${
+    const url = `https://anistack-1.onrender.com/user/${
       mode === "Sign In" ? "signin" : "login"
     }`;
     const payload = {

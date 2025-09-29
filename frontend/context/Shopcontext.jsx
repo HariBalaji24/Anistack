@@ -8,7 +8,7 @@ const Shopcontextprovider = (props) => {
 
   function addanime(clicked) {
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/addanime", {
+      fetch("https://anistack-1.onrender.com/addanime", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const Shopcontextprovider = (props) => {
 
   function addmanga(clicked) {
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/addmanga", {
+      fetch("https://anistack-1.onrender.com/addmanga", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

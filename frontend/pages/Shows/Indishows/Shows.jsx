@@ -73,7 +73,7 @@ const Shows = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/animepost",
+        "https://anistack-1.onrender.com/user/animepost",
         details,
         {
           headers: { authorization: token },
@@ -100,7 +100,7 @@ const Shows = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/mangapost",
+        "https://anistack-1.onrender.com/user/mangapost",
         details,
         {
           headers: { authorization: token },
@@ -119,7 +119,7 @@ const Shows = () => {
         updatedAt: new Date(updatedat).toISOString(),
         numberofepisodeswatched: episodeList,
       };
-      await axios.patch("http://localhost:3000/user/animechanges", details, {
+      await axios.patch("https://anistack-1.onrender.com/user/animechanges", details, {
         headers: { authorization: token },
       });
     } catch (error) {
@@ -136,7 +136,7 @@ const Shows = () => {
         updatedAt: new Date(updatedat).toISOString(),
         numberofchaptersread: chapterList,
       };
-      await axios.patch("http://localhost:3000/user/mangachanges", details, {
+      await axios.patch("https://anistack-1.onrender.com/user/mangachanges", details, {
         headers: { authorization: token },
       });
     } catch (error) {
@@ -150,7 +150,7 @@ const Shows = () => {
     const getmangadetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/getmangadetails?id=${id}`,
+          `https://anistack-1.onrender.com/user/getmangadetails?id=${id}`,
           {
             headers: { authorization: token },
           }
@@ -178,7 +178,7 @@ const Shows = () => {
     const getanimedetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/getanimedetails?id=${id}`,
+          `https://anistack-1.onrender.com/user/getanimedetails?id=${id}`,
           { headers: { authorization: token } }
         );
 
