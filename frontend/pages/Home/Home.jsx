@@ -83,26 +83,32 @@ const Home = () => {
           src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/178788-uYQZgw1v7xyN.jpg"
           alt="Banner"
         />
-
-        <input
-          className="home-search-bar"
-          type="text"
-          placeholder="Search anime"
-          onChange={(e) => showResults(e.target.value)}
-        />
-
-        <img
-          src="https://pixsector.com/cache/e7836840/av6584c34aabb39f00a10.png"
-          alt="Search icon"
-          className="home-search-icon"
-        />
+        <div className="search-wrapper">
+          <div className="search-warpper-1">
+            <input
+              className="home-search-bar"
+              type="text"
+              placeholder="Search anime"
+              onChange={(e) => showResults(e.target.value)}
+            />
+            <img
+              src="https://pixsector.com/cache/e7836840/av6584c34aabb39f00a10.png"
+              alt="Search icon"
+              className="home-search-icon"
+            />
+          </div>
+        </div>
       </div>
       <div className="search-elements">
         {searchresults !== null &&
-          searchresults.map((anime,index) => {
+          searchresults.map((anime, index) => {
             return (
               <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
-                <div className={`search-card ${index % 2 === 0 ? "search-even-index" : "search-odd-index"}`}>
+                <div
+                  className={`search-card ${
+                    index % 2 === 0 ? "search-even-index" : "search-odd-index"
+                  }`}
+                >
                   <img
                     src={anime.images.jpg.large_image_url}
                     alt=""

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap");
 
 /* ================= NAVBAR BASE ================= */
 .navbar {
@@ -15,10 +15,8 @@
   height: 10vh;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3vw ;
+  padding: 0 3vw;
 }
-
-
 
 /* ================= LOGO + TITLE ================= */
 .navbar-left {
@@ -44,7 +42,7 @@
 .navbar-middle ul {
   display: flex;
   flex-wrap: wrap;
-  width: 30vw;
+  width: 37vw;
   list-style: none;
   gap: 2vw;
   padding: 0;
@@ -155,7 +153,7 @@
   gap: 10px;
   align-items: center;
   text-align: center;
-  padding:10px;
+  padding: 10px;
   border-radius: 10px;
   z-index: 1000;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -206,7 +204,7 @@
   gap: 10px;
   right: 50px;
   text-align: center;
-  top:65px;
+  top: 65px;
   z-index: 10;
 }
 
@@ -224,3 +222,36 @@
 }
 
 /* ================== RESPONSIVE ================== */
+@media (max-width: 1024px) {
+  .navbar-middle ul {
+    width: 40vw;
+    gap: 2vw;
+    font-size: 15px;
+  }
+  .navbar-user{
+    width: 12vw;
+  }
+}
+
+@media (max-width: 928px) {
+  .navbar-middle ul {
+    width: 40vw;
+    gap: 2vw;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 805px) {
+  .navbar-middle ul {
+    width: 45vw;
+    gap: 2vw;
+    font-size: 13px;
+  }
+}
+@media (max-width: 696px) {
+  .navbar-middle ul {
+    width: 50vw;
+    gap: 2vw;
+    font-size: 13px;
+  }
+}
