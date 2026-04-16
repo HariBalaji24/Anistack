@@ -8,11 +8,20 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const port = process.env.PORT || 3000;
 
-// ✅ Fix CORS here
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://anistack-wine.vercel.app"
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
-  origin:"https://anistack-wine.vercel.app", // frontend origin
-  credentials: true, 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 
 app.use(express.json());
