@@ -53,7 +53,6 @@ export const login = async (req, res) => {
   }
 };
 
-
 export const googlelogin = async (req, res) => {
   try {
     const { code } = req.query;
@@ -85,3 +84,9 @@ export const googlelogin = async (req, res) => {
     return res.status(500).json({ message: "Google login failed", error: err.message });
   }
 };
+
+export default{
+  signup,
+  login,
+  googlelogin
+}

@@ -1,8 +1,7 @@
-import User from "../models/model.js";
+import User from "../models/model.js"
 import jwt from "jsonwebtoken";
 
 const secretkey = process.env.SECRETKEY;
-
 
 export const getname = async (req, res) => {
   try {
@@ -92,6 +91,7 @@ export const mangapost = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
 export const animechange = async (req, res) => {
   try {
     const token = req.headers["authorization"];
@@ -261,3 +261,15 @@ export const getuserdetails = async (req, res) => {
       .json({ animedetails: animedetails, mangadetails: mangadetails });
   } catch (error) {}
 };
+
+export default{
+  getname,
+  animepost,
+  mangapost,
+  animechange,
+  mangachange,
+  getanimedetails,
+  getmangadetails,
+  getuseranimes,
+  getuserdetails
+}

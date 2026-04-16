@@ -1,6 +1,6 @@
-const express = require("express");
-const authcontroller = require("../controllers/authcontroller");
-const detailscontroller = require("../controllers/detailscontroller");
+import express from "express";
+import authcontroller from "../controllers/authcontroller.js";
+import detailscontroller from "../controllers/detailscontroller.js";
 const userrouter= express.Router()
 
 userrouter.route("/signin").post(authcontroller.signup)
@@ -18,4 +18,4 @@ userrouter.route("/getanimedetails").get(detailscontroller.getanimedetails)
 userrouter.route("/getmangadetails").get(detailscontroller.getmangadetails)
 
 userrouter.route("/user-details").get(detailscontroller.getuserdetails)
-module.exports = userrouter
+export default userrouter

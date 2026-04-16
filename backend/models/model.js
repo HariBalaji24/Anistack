@@ -1,6 +1,6 @@
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const validator = require("validator");
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import validator from "validator";
 dotenv.config({ path: "./config.env" });
 
 const db = process.env.MONGOOSE;
@@ -69,4 +69,4 @@ const userschema = new mongoose.Schema({
 });
 
 const User = mongoose.model("Users", userschema);
-module.exports = User;
+export default User;
