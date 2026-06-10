@@ -8,7 +8,7 @@ Built using the **MERN Stack**, AniStack integrates with the **Jikan API** to pr
 
 ## 🚀 Live Demo
 
-[🔗 Add your deployed link here](https://anistack-wine.vercel.app)
+[https://anistack-wine.vercel.app](https://anistack-wine.vercel.app)
 
 ---
 
